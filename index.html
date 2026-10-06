@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>صور المذاكرة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F8;--card:#fff;--ink:#1B2540;--mute:#6A7390;--line:#D5DCEA;--note:#0E8F7E;--exam:#5B4BDB;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131827;--card:#1C2338;--ink:#E8ECF7;--mute:#97A0BC;--line:#2D3652;--note:#2FC4AF;--exam:#8E83FF;--on:#0F1424}}
+:root[data-theme="dark"]{--bg:#131827;--card:#1C2338;--ink:#E8ECF7;--mute:#97A0BC;--line:#2D3652;--note:#2FC4AF;--exam:#8E83FF;--on:#0F1424}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,sans-serif;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--exam);outline-offset:2px}
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:var(--card);border-inline-end:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:10px}
+aside h1{font-size:20px;font-weight:800;margin:0 6px 10px}
+.nav{display:flex;justify-content:space-between;align-items:center;border:2px solid transparent;background:transparent;border-radius:12px;padding:12px 14px;font-weight:600;font-size:17px;text-align:start}
+.nav b{font-size:13px;background:var(--bg);border-radius:20px;padding:1px 10px;color:var(--mute)}
+.nav.on[data-t="note"]{background:var(--note);color:var(--on)}
+.nav.on[data-t="exam"]{background:var(--exam);color:var(--on)}
+.nav.on b{background:rgba(255,255,255,.25);color:inherit}
+.nav:not(.on):hover{border-color:var(--line)}
+main{padding:22px;max-width:980px;width:100%}
+.add{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:600;font-size:16px;background:var(--ink);color:var(--bg)}
+.btn.alt{background:var(--card);color:var(--ink);border:2px solid var(--line)}
+h2{font-size:18px;margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:9px 16px;font-weight:600;display:flex;gap:8px;align-items:center}
+.chip i{font-style:normal;font-size:12px;color:var(--mute)}
+.chip.on{color:var(--on);border-color:transparent}
+.t-note .chip.on{background:var(--note)}.t-exam .chip.on{background:var(--exam)}
+.chip.on i{color:inherit;opacity:.85}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ph{border:0;padding:0;border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:var(--line)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.empty{color:var(--mute);border:2px dashed var(--line);border-radius:14px;padding:30px;text-align:center}
+.ov{position:fixed;inset:0;background:rgba(10,14,28,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.ov.show{display:flex}
+.box{background:var(--card);border-radius:18px;padding:18px;width:min(520px,100%);max-height:92vh;overflow:auto}
+.box img.pv{width:100%;max-height:240px;object-fit:contain;background:var(--bg);border-radius:10px;margin-bottom:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.seg .chip{justify-content:center;font-size:17px}
+.row{display:flex;gap:8px;margin-top:10px}.row .btn{flex:1}
+.viewer img{max-width:100%;max-height:32vh;object-fit:contain;border-radius:10px;display:block;margin:0 auto 12px}
+.ai{margin:4px 0 12px}.ai .chips{margin-bottom:10px}
+.out{background:var(--bg);border-radius:12px;padding:12px;margin-bottom:12px;line-height:1.8;font-size:15px}
+.txt{white-space:pre-wrap}
+.ask{display:flex;gap:8px;margin-bottom:12px}.ask input{flex:1;min-width:0;font:inherit;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.fc{background:var(--exam);color:var(--on);border:0;border-radius:16px;min-height:150px;width:100%;padding:20px;font-size:19px;font-weight:600;margin-bottom:10px}
+.fc.back{background:var(--note)}
+.opt{display:block;width:100%;text-align:start;margin-bottom:8px;border:2px solid var(--line);background:var(--card);border-radius:10px;padding:10px 14px}
+.opt.ok{border-color:var(--note)}.opt.no{border-color:#D64545}
+.inp{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);margin-bottom:10px;direction:ltr;text-align:left}
+.sm{color:var(--mute);font-size:14px;margin:6px 0}
+@media (max-width:700px){
+.app{grid-template-columns:1fr}
+aside{flex-direction:row;padding:12px;border-inline-end:0;border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:2}
+aside h1{display:none}.nav{flex:1}
+main{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+<h1>صور المذاكرة</h1>
+<button class="nav" data-t="note"><span>ملاحظات</span><b id="c-note">0</b></button>
+<button class="nav" data-t="exam"><span>امتحان</span><b id="c-exam">0</b></button>
+</aside>
+<main id="main">
+<div class="add">
+<button class="btn" id="cam">تصوير بالكاميرا</button>
+<button class="btn alt" id="pick">اختيار صورة من الجهاز</button>
+<button class="btn alt" id="cfg-btn">إعداد الذكاء الاصطناعي</button>
+</div>
+<input type="file" id="f-cam" accept="image/*" capture="environment" hidden>
+<input type="file" id="f-pick" accept="image/*" hidden>
+<div id="view"></div>
+</main>
+</div>
+
+<div class="ov" id="ov-add"><div class="box">
+<img class="pv" id="pv" alt="الصورة اللي هتتحفظ">
+<h2>الصورة دي لإيه؟</h2>
+<div class="seg" id="seg"></div>
+<h2>المادة</h2>
+<div class="chips" id="subs"></div>
+<div class="row"><button class="btn" id="save" disabled>حفظ الصورة</button><button class="btn alt" id="cancel">إلغاء</button></div>
+</div></div>
+
+<div class="ov" id="ov-cfg"><div class="box">
+<h2>اتصال الذكاء الاصطناعي</h2>
+<p class="sm">مفتاح API من console.anthropic.com. بيتحفظ في المتصفح ده بس، والاستخدام بيتحسب على حسابك.</p>
+<input class="inp" id="cfg-key" type="password" placeholder="sk-ant-..." autocomplete="off">
+<p class="sm">اختياري: رابط السيرفر الوسيط (Worker) لو مش عايز تحط المفتاح في المتصفح.</p>
+<input class="inp" id="cfg-proxy" type="url" placeholder="https://...workers.dev">
+<div class="row"><button class="btn" id="cfg-save">حفظ</button><button class="btn alt" id="cfg-x">إغلاق</button></div>
+</div></div>
+
+<div class="ov" id="ov-view"><div class="box viewer">
+<img id="big" alt="">
+<div class="ai" id="ai">
+<div class="chips" id="ai-bar"></div>
+<div class="ask"><input id="ask-in" placeholder="اسأل سؤال عن الصورة دي"><button class="btn" id="ask-go">اسأل</button></div>
+<div class="out" id="ai-out" hidden></div>
+</div>
+<div class="sm" id="ai-na" hidden>ميزة الذكاء الاصطناعي بتشتغل بس لما تفتح الموقع من جوه Claude.</div>
+<div class="row"><button class="btn alt" id="close">إغلاق</button><button class="btn" id="del">حذف الصورة</button></div>
+</div></div>
+
+<script>
+const SUBJ=['عربي','إنجليزي','إنجليزي 2','فرنساوي','ألماني','دين','رياضيات','علوم','دراسات','تكنولوجيا'];
+const TYPES={note:'ملاحظات',exam:'امتحان'};
+const $=id=>document.getElementById(id);
+let db=null,mem=[],items=[],cur={t:'note',s:null},pend=null,viewing=null;
+
+function openDB(){return new Promise(r=>{try{const q=indexedDB.open('school-photos',1);q.onupgradeneeded=()=>q.result.createObjectStore('p',{keyPath:'id'});q.onsuccess=()=>{db=q.result;r()};q.onerror=()=>r()}catch(e){r()}})}
+function loadAll(){return new Promise(r=>{if(!db)return r(mem.slice());try{const q=db.transaction('p').objectStore('p').getAll();q.onsuccess=()=>r(q.result);q.onerror=()=>r(mem.slice())}catch(e){r(mem.slice())}})}
+function putOne(o){return new Promise(r=>{if(!db){mem.push(o);return r()}try{const t=db.transaction('p','readwrite');t.objectStore('p').put(o);t.oncomplete=r;t.onerror=()=>{mem.push(o);r()}}catch(e){mem.push(o);r()}})}
+function delOne(id){mem=mem.filter(x=>x.id!==id);if(db)try{db.transaction('p','readwrite').objectStore('p').delete(id)}catch(e){}}
+
+function shrink(file){return new Promise((res,rej)=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{const k=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.8))};im.onerror=rej;im.src=u})}
+
+function chip(label,on,extra=''){return `<button class="chip${on?' on':''}" ${extra}>${label}</button>`}
+const count=(t,s)=>items.filter(i=>i.type===t&&(!s||i.subject===s)).length;
+
+function render(){
+ $('c-note').textContent=count('note');$('c-exam').textContent=count('exam');
+ document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on',n.dataset.t===cur.t));
+ const list=items.filter(i=>i.type===cur.t&&i.subject===cur.s).sort((a,b)=>b.ts-a.ts);
+ let h=`<div class="t-${cur.t}"><h2>${TYPES[cur.t]} — اختار المادة</h2><div class="chips">`;
+ SUBJ.forEach(s=>{h+=`<button class="chip${cur.s===s?' on':''}" data-s="${s}">${s}<i>${count(cur.t,s)}</i></button>`});
+ h+='</div>';
+ if(!cur.s)h+='<div class="empty">اختار مادة عشان تشوف الصور اللي ضفتها.</div>';
+ else if(!list.length)h+=`<div class="empty">مفيش صور ${TYPES[cur.t]} في ${cur.s} لسه. دوس على تصوير أو اختيار صورة.</div>`;
+ else{h+=`<h2>${cur.s} (${list.length})</h2><div class="grid">`;list.forEach(i=>{h+=`<button class="ph" data-id="${i.id}"><img src="${i.data}" alt="${TYPES[i.type]} ${i.subject}"></button>`});h+='</div>'}
+ $('view').innerHTML=h+'</div>';
+}
+
+function drawAdd(){
+ $('seg').innerHTML=Object.keys(TYPES).map(k=>`<button class="chip${pend.type===k?' on':''}" data-k="${k}">${TYPES[k]}</button>`).join('');
+ $('seg').className='seg t-'+(pend.type||'note');
+ $('subs').className='chips t-'+(pend.type||'note');
+ $('subs').innerHTML=SUBJ.map(s=>`<button class="chip${pend.subject===s?' on':''}" data-s="${s}">${s}</button>`).join('');
+ $('save').disabled=!(pend.type&&pend.subject);
+}
+
+async function onFile(e){
+ const f=e.target.files[0];e.target.value='';if(!f)return;
+ try{const data=await shrink(f);pend={data,type:null,subject:null};$('pv').src=data;drawAdd();$('ov-add').classList.add('show')}
+ catch(err){alert('الصورة دي مش بتفتح. جرب صورة تانية.')}
+}
+
+$('cam').onclick=()=>$('f-cam').click();
+$('pick').onclick=()=>$('f-pick').click();
+$('f-cam').onchange=onFile;$('f-pick').onchange=onFile;
+document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>{cur={t:n.dataset.t,s:null};render()});
+$('view').onclick=e=>{
+ const s=e.target.closest('[data-s]'),p=e.target.closest('[data-id]');
+ if(s){cur.s=s.dataset.s;render()}
+ if(p)openViewer(items.find(i=>i.id==p.dataset.id));
+};
+$('seg').onclick=e=>{const k=e.target.closest('[data-k]');if(k){pend.type=k.dataset.k;drawAdd()}};
+$('subs').onclick=e=>{const s=e.target.closest('[data-s]');if(s){pend.subject=s.dataset.s;drawAdd()}};
+$('cancel').onclick=()=>{pend=null;$('ov-add').classList.remove('show')};
+$('save').onclick=async()=>{
+ const o={id:Date.now()+''+Math.floor(Math.random()*1000),type:pend.type,subject:pend.subject,data:pend.data,ts:Date.now()};
+ await putOne(o);items.push(o);cur={t:o.type,s:o.subject};pend=null;
+ $('ov-add').classList.remove('show');render();
+};
+$('close').onclick=closeViewer;
+$('del').onclick=()=>{
+ if(!viewing||!confirm('تحذف الصورة دي؟'))return;
+ delOne(viewing.id);items=items.filter(i=>i.id!==viewing.id);viewing=null;
+ closeViewer();render();
+};
+
+let sample=null,imgOK=false,ctl=null;
+const ready=(async()=>{try{if(window.claude){sample=await claude.use('sample');if(sample){const l=await sample.limits();imgOK=!!l.images}}}catch(e){}})();
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+function toBlob(d){const b=atob(d.split(',')[1]),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return new Blob([a],{type:'image/jpeg'})}
+const NA='الذكاء الاصطناعي مش شغال في الطريقة اللي فتحت بيها الموقع. بيشتغل بس لما تفتح اللينك وانت مسجل دخول في Claude (من التطبيق أو من claude.ai). في متصفح عادي من غير تسجيل دخول مش هيشتغل.';
+const ERR={no_key:'لازم تحط مفتاح الذكاء الاصطناعي الأول.',bad_key:'المفتاح غلط أو منتهي. اتأكد منه وجرب تاني.',net:'الطلب ما وصلش. اتأكد من النت أو من رابط السيرفر.',rate_limited:'الاستخدام كتير دلوقتي. استنى شوية وجرب تاني.',image_rejected:'الصورة مش مقبولة. جرب تصورها تاني.',refused:'مقدرتش أرد على الصورة دي. جرب صورة تانية.',not_granted:'لازم توافق على استخدام Claude عشان الميزة دي تشتغل.',session_expired:'سجل دخول تاني وجرب.',invalid_json:'الرد جه مش مظبوط. دوس تاني.'};
+function openViewer(it){
+ viewing=it;$('big').src=it.data;$('ov-view').classList.add('show');
+ $('ai-na').hidden=true;$('ai-out').hidden=true;$('ask-in').value='';
+ const bar=$('ai-bar');bar.replaceChildren();
+ const btns=it.type==='exam'?[['صحح الامتحان','exam']]:[['فلاش كاردز','fc'],['اختبرني','quiz'],['اشرح الملاحظات','explain']];
+ btns.forEach(([l,k])=>{const b=el('button','chip on',l);b.style.background=it.type==='exam'?'var(--exam)':'var(--note)';b.onclick=()=>ai(k);bar.append(b)});
+}
+function closeViewer(){if(ctl)ctl.abort();ctl=null;viewing=null;$('ov-view').classList.remove('show')}
+function prompts(it,k,q){
+ const c=`الصورة دي ${it.type==='exam'?'ورقة امتحان':'ملاحظات مذاكرة'} لطالب في مادة ${it.subject}. رد بالعربي المصري البسيط ومن غير رموز ماركداون زي ** أو #. لو جزء مش واضح في الصورة قول كده ومتخمنش.`;
+ return {
+  exam:c+' اقرا كل سؤال وإجابة الطالب المكتوبة. لكل سؤال اكتب: رقم السؤال، إجابة الطالب، صح ولا غلط، الإجابة الصح، وشرح قصير لسبب الغلط لو فيه غلط. لو مفيش إجابات مكتوبة، حل الأسئلة واشرح الحل. في الآخر اكتب أهم الدروس اللي لازم يراجعها.',
+  explain:c+' لخص الملاحظات في نقط واضحة واشرح الأفكار الصعبة ببساطة.',
+  fc:c+' اعمل من الملاحظات من 6 لـ 10 فلاش كاردز. رد بـ JSON بس: مصفوفة عناصرها {"q":"السؤال","a":"الإجابة القصيرة"}.',
+  quiz:c+' اعمل 5 أسئلة اختيار من متعدد على الملاحظات، كل سؤال له 4 اختيارات، ووزع مكان الإجابة الصح. رد بـ JSON بس: مصفوفة عناصرها {"q":"..","options":["..","..","..",".."],"answer":0,"why":"شرح قصير"} وفيها answer هو رقم الاختيار الصح بادئ من صفر.',
+  ask:c+' سؤال الطالب: '+q
+ }[k];
+}
+const MODEL='claude-sonnet-5-5';
+function getCfg(){try{return JSON.parse(localStorage.getItem('ai-cfg'))||{}}catch(e){return{}}}
+function setCfg(c){try{localStorage.setItem('ai-cfg',JSON.stringify(c))}catch(e){}}
+async function viaApi(p,it,opt){
+ const c=getCfg();
+ if(!c.key&&!c.proxy)throw{code:'no_key'};
+ const h={'content-type':'application/json'};
+ if(!c.proxy){h['x-api-key']=c.key;h['anthropic-version']='2023-06-01';h['anthropic-dangerous-direct-browser-access']='true'}
+ const body={model:MODEL,max_tokens:3000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:it.data.split(',')[1]}},{type:'text',text:p}]}]};
+ let r;
+ try{r=await fetch(c.proxy||'https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify(body),signal:opt.signal})}
+ catch(e){if(opt.signal.aborted)throw{code:'cancelled'};throw{code:'net'}}
+ if(!r.ok)throw{code:r.status==401||r.status==403?'bad_key':r.status==429?'rate_limited':'upstream_error'};
+ const d=await r.json(),t=(d.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\n');
+ if(!t)throw{code:'empty_completion'};
+ if(!opt.json)return t;
+ const i=t.indexOf('['),j=t.lastIndexOf(']');
+ try{return JSON.parse(t.slice(i,j+1))}catch(e){throw{code:'invalid_json'}}
+}
+async function run(p,it,opt){
+ if(sample&&imgOK){
+  const o={images:[toBlob(it.data)],signal:opt.signal,cache:false};
+  if(opt.json)return sample.json(p,o);
+  return (await sample(p,{...o,onText:opt.onText})).text;
+ }
+ return viaApi(p,it,opt);
+}
+async function ai(k,q){
+ if(!viewing)return;
+ if(ctl)ctl.abort();
+ const my=ctl=new AbortController(),it=viewing,out=$('ai-out');
+ const box=el('div','txt','بجهز الاتصال…'),stop=el('button','btn alt','إيقاف');
+ stop.onclick=()=>my.abort();
+ out.hidden=false;out.replaceChildren(box,stop);
+ await ready;
+ if(my.signal.aborted)return;
+ box.textContent='بفكر…';
+ try{
+  const p=prompts(it,k,q);
+  if(k==='fc'||k==='quiz'){
+   const d=await run(p,it,{json:true,signal:my.signal});
+   const good=Array.isArray(d)?d.filter(x=>x&&x.q&&(k==='fc'?x.a:Array.isArray(x.options)&&x.options.length>1)):[];
+   if(!good.length)throw{code:'invalid_json'};
+   k==='fc'?cards(good,out):quiz(good,out);
+  }else{
+   const t=await run(p,it,{signal:my.signal,onText:({text})=>{box.textContent=text}});
+   box.textContent=t;stop.remove();
+  }
+ }catch(e){
+  if(my.signal.aborted||e.code==='cancelled'){if(ctl===my)out.hidden=true;return}
+  stop.remove();
+  box.textContent=(e.text?e.text+'\n\n':'')+(ERR[e.code]||'حصل خطأ. جرب تاني.');
+  if(e.code==='no_key'||e.code==='bad_key'){const b=el('button','btn',' فتح الإعدادات'.trim());b.onclick=openCfg;out.append(b)}
+ }
+}
+function openCfg(){const c=getCfg();$('cfg-key').value=c.key||'';$('cfg-proxy').value=c.proxy||'';$('ov-cfg').classList.add('show')}
+$('cfg-btn').onclick=openCfg;
+$('cfg-x').onclick=()=>$('ov-cfg').classList.remove('show');
+$('cfg-save').onclick=()=>{setCfg({key:$('cfg-key').value.trim(),proxy:$('cfg-proxy').value.trim()});$('ov-cfg').classList.remove('show')};
+function cards(d,out){
+ let i=0,back=false;
+ const draw=()=>{
+  const c=el('button','fc'+(back?' back':''),back?d[i].a:d[i].q);
+  c.onclick=()=>{back=!back;draw()};
+  const n=el('div','sm',`${i+1} من ${d.length} — دوس على الكارت يتقلب`);
+  const r=el('div','row');
+  const nx=el('button','btn',i<d.length-1?'التالي':'من الأول'),pv=el('button','btn alt','السابق');
+  pv.disabled=i==0;nx.onclick=()=>{i=i<d.length-1?i+1:0;back=false;draw()};pv.onclick=()=>{i--;back=false;draw()};
+  r.append(pv,nx);out.replaceChildren(c,n,r);
+ };draw();
+}
+function quiz(d,out){
+ let i=0,sc=0;
+ const draw=()=>{
+  if(i>=d.length){const b=el('button','btn','ابدأ تاني');b.onclick=()=>{i=0;sc=0;draw()};out.replaceChildren(el('h2',null,`نتيجتك ${sc} من ${d.length}`),b);return}
+  const x=d[i],w=el('div');w.append(el('h2',null,`${i+1}) ${x.q}`));
+  const note=el('div','txt'),nx=el('button','btn',i<d.length-1?'السؤال التالي':'شوف النتيجة');nx.hidden=true;
+  nx.onclick=()=>{i++;draw()};
+  const opts=x.options.map((t,j)=>{const b=el('button','opt',t);b.onclick=()=>{
+   opts.forEach((o,m)=>{o.disabled=true;if(m==x.answer)o.classList.add('ok')});
+   if(j==x.answer)sc++;else b.classList.add('no');
+   note.textContent=(j==x.answer?'صح! ':'غلط. ')+(x.why||'');nx.hidden=false};return b});
+  w.append(...opts,note,nx);out.replaceChildren(w);
+ };draw();
+}
+$('ask-go').onclick=()=>{const q=$('ask-in').value.trim();if(q)ai('ask',q)};
+$('ask-in').onkeydown=e=>{if(e.key==='Enter')$('ask-go').click()};
+
+openDB().then(loadAll).then(r=>{items=r;render()});
+</script>
+</body>
+</html>
